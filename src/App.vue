@@ -1,112 +1,126 @@
 <template>
   <div class="app">
     <header class="header">
-      <h1>My Awesome App</h1>
+      <div class="left-shekel"><img :src="shekelSVG" alt="שח" /></div>
+      <h1>
+        <span>?</span><span>מי מ<img :src="topSvg" alt="ש" />לם בדייט</span>
+      </h1>
+      <div class="right-shekel"><img :src="shekelSVG" alt="שח" /></div>
     </header>
-    <div class="content-container">
-      <div v-if="stage === 'sex'" class="question-container">
-        <h2>What is your sex?</h2>
-        <button @click="setSex('male')">Male</button>
-        <button @click="setSex('female')">Female</button>
-      </div>
-
-      <transition name="slide" mode="out-in">
-        <div
-          v-if="stage === 'questions' && currentQuestion < questions.length"
-          :key="currentQuestion"
-          class="question-container"
-        >
-          <h2>{{ questions[currentQuestion] }}</h2>
-          <button @click="answerQuestion(true)">Yes</button>
-          <button @click="answerQuestion(false)">No</button>
-          <div class="svg-container">
-            <svg
-              viewBox="0 0 100 100"
-              xmlns="http://www.w3.org/2000/svg"
-              width="100"
-              height="100"
-            >
-              <path :d="svgPaths[currentQuestion]" fill="black" />
-            </svg>
-          </div>
-        </div>
-      </transition>
-
-      <div v-if="stage === 'summary'" class="summary-container">
-        <h2>Summary</h2>
-        <p>Sex: {{ sex }}</p>
-        <ul>
-          <li v-for="(answer, index) in answers" :key="index">
-            {{ questions[index] }}: {{ answer ? "Yes" : "No" }}
-          </li>
-        </ul>
-      </div>
-    </div>
+    <transition name="slide" mode="out-in">
+      <router-view
+        :key="$route.path"
+        :questions="questions"
+        :answers="answers"
+        :svgPaths="svgPaths"
+        :sex="sex"
+        @set-sex="setSex"
+        @answer-question="answerQuestion"
+      ></router-view>
+    </transition>
     <footer class="footer">
+      <div class="left-shekel"><img :src="shekelSVG" alt="שח" /></div>
       <p>
-        Created by Your Name |
+        נוצר על ידי אור יניב |
         <a href="https://buymeacoffee.com/yourlink" target="_blank"
-          >Buy me a beer</a
+          >קנו לי שוקו</a
         >
       </p>
+      <div class="right-shekel"><img :src="shekelSVG" alt="שח" /></div>
     </footer>
   </div>
 </template>
 
 <script>
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router/router.js";
+
+const questionsM = [
+  "מתכונן שעות לפני פגישה?",
+  "תהיה מוכן להיפגש תמיד לידה?",
+  "תצא עם מישהי שמרוויחה יותר ממך?",
+  "היית מוכן להיות מפרנס משני בזוגיות?",
+  "תסכים לצאת עם בחורה שמתחילה איתך?",
+  "האם זה תפקיד הגבר לחזק ולפנק?",
+  "מי יטפל בילדים?",
+  "רבתם. הגיוני שתמיד אתה תתחיל בסולחה?",
+  "תקנא אם היא מפלרטטת עם אחרים?",
+  "תצא עם פמיניסטית?",
+];
+
+const questionsF = [
+  "האם את אישה חזקה ועצמאית",
+  "חובה שתיפגשו קרוב אלייך",
+  "תצאי עם גבר נמוך ממך",
+  "הפי וייף הפי לייף",
+  "תצאי עם מישהו שמרוויח פחות ממך",
+  "מתכוננת שעות לפני פגישה",
+  "האם היית מסוגלת להיות עקרת בית",
+  "האם נשים מופלות במקום העבודה",
+  "היית מסוגלת להתחיל עם גבר",
+  "תחלקו את מטלות הבית שווה בשווה",
+];
+
 export default {
   data() {
     return {
-      stage: "sex",
       sex: null,
       currentQuestion: 0,
-      questions: [
-        "Do you enjoy outdoor activities?",
-        "Are you a morning person?",
-        "Do you prefer coffee over tea?",
-        "Do you like to travel?",
-        "Are you interested in technology?",
-        "Do you enjoy reading books?",
-        "Are you a pet owner?",
-        "Do you prefer summer over winter?",
-        "Are you into fitness?",
-        "Do you enjoy cooking?",
-      ],
+      questions: [],
       answers: [],
+      topSvg: require("@/assets/heart_svg.svg"),
+      shekelSVG: require("@/assets/shekel.png"),
       svgPaths: [
         require("@/assets/question1.svg"),
         require("@/assets/question2.svg"),
         require("@/assets/question3.svg"),
+        require("@/assets/question1.svg"),
         require("@/assets/question4.svg"),
         require("@/assets/question5.svg"),
         require("@/assets/question6.svg"),
         require("@/assets/question7.svg"),
         require("@/assets/question8.svg"),
         require("@/assets/question9.svg"),
-        require("@/assets/question10.svg"),
       ],
     };
   },
   methods: {
     setSex(selectedSex) {
       this.sex = selectedSex;
-      this.stage = "questions";
+      this.questions = this.sex === "male" ? questionsM : questionsF;
     },
-    answerQuestion(answer) {
+    answerQuestion({ id, answer }) {
+      this.answers = this.answers.slice(0, id);
       this.answers.push(answer);
-      this.currentQuestion++;
-      if (this.currentQuestion >= this.questions.length) {
-        this.stage = "summary";
-      }
     },
   },
 };
+
+createApp(App).use(router).mount("#app");
 </script>
 
 <style>
 :root {
-  --warm-pink: #ffc0cb;
+  /* --warm-pink: #ffc0cb; */
+  --warm-pink: #eb7388;
+  /* --warm-pink: #f04664; */
   --button-text-color: #ffc0cb;
+}
+
+@font-face {
+  font-family: "GveretLevinAlefAlefAlef";
+  src: url("@/assets/fonts/Gveret Levin Alef Alef Alef.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DanaYadAlefAlefAlefNormal";
+  src: url("@/assets/fonts/Dana Yad Alef Alef Alef Normal.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body,
@@ -136,9 +150,33 @@ html {
   padding: 10px 0;
 }
 
+header .left-shekel,
+footer .left-shekel {
+  display: inline-block;
+  float: left;
+}
+
+header .right-shekel,
+footer .right-shekel {
+  display: inline-block;
+  float: right;
+}
+
+.right-shekel img,
+.left-shekel img {
+  height: 30px;
+  width: 30px;
+}
+
 .header h1,
 .footer p {
-  margin: 0;
+  margin: -5px 0 0 0;
+  display: inline-block;
+}
+
+header h1 span {
+  font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
+  letter-spacing: 3px;
 }
 
 .footer a {
@@ -163,6 +201,18 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.question-container h2 {
+  font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
+  letter-spacing: 3px;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.question-container button {
+  font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
+  letter-spacing: 3px;
 }
 
 .svg-container {

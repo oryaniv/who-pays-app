@@ -1,0 +1,8 @@
+<svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g fill="white">
+    <!-- Shin (ש) -->
+    <path d="M20 20 L40 20 L50 40 L60 20 L80 20 L60 60 L60 80 L40 80 L40 60 Z"/>
+    <!-- Chet (ח) -->
+    <path d="M30 40 L70 40 L70 80 L50 80 L50 60 L30 60 Z"/>
+  </g>
+</svg>
