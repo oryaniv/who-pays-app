@@ -72,16 +72,16 @@ export default {
       topSvg: require("@/assets/heart_svg.svg"),
       shekelSVG: require("@/assets/shekel.png"),
       svgPaths: [
-        require("@/assets/question1.svg"),
-        require("@/assets/question2.svg"),
-        require("@/assets/question3.svg"),
-        require("@/assets/question1.svg"),
-        require("@/assets/question4.svg"),
-        require("@/assets/question5.svg"),
-        require("@/assets/question6.svg"),
-        require("@/assets/question7.svg"),
-        require("@/assets/question8.svg"),
-        require("@/assets/question9.svg"),
+        require("@/assets/flowers.svg"),
+        require("@/assets/dresstux.svg"),
+        require("@/assets/car.svg"),
+        require("@/assets/kiss.svg"),
+        require("@/assets/martiny.svg"),
+        require("@/assets/heelshoe.svg"),
+        require("@/assets/dessert.svg"),
+        require("@/assets/male_female.svg"),
+        require("@/assets/beach.svg"),
+        require("@/assets/heart_q.svg"),
       ],
     };
   },
@@ -201,6 +201,7 @@ header h1 span {
   display: flex;
   flex-direction: column;
   align-items: center;
+  direction: rtl;
 }
 
 .question-container h2 {

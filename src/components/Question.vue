@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div class="question-container">
-    <h2><span>?{{ question }}</span></h2>
+    <h2><span>{{ question }}</span></h2>
     <button @click="answerQuestion(true)">כן</button>
     <button @click="answerQuestion(false)">לא</button>
     <div class="svg-container">

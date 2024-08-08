@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div class="question-container">
-    <h2>?מה המין שלך</h2>
+    <h2>מה המין שלך?</h2>
     <button @click="setSex('male')">זכר</button>
     <button @click="setSex('female')">נקבה</button>
   </div>
