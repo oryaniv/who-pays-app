@@ -2,8 +2,8 @@
 <template>
   <div class="question-container">
     <h2>מה המין שלך?</h2>
-    <button @click="setSex('male')">זכר</button>
     <button @click="setSex('female')">נקבה</button>
+    <button @click="setSex('male')">זכר</button>
   </div>
 </template>
 
