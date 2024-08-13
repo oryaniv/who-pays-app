@@ -156,7 +156,7 @@ html {
 
 .app {
   font-family: Arial, sans-serif;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
