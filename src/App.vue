@@ -95,6 +95,29 @@ export default {
       this.answers.push(answer);
     },
   },
+  mounted() {
+    const svgPaths = [
+      require("@/assets/flowers.svg"),
+      require("@/assets/dresstux.svg"),
+      require("@/assets/car.svg"),
+      require("@/assets/kiss.svg"),
+      require("@/assets/martiny.svg"),
+      require("@/assets/heelshoe.svg"),
+      require("@/assets/dessert.svg"),
+      require("@/assets/male_female.svg"),
+      require("@/assets/beach.svg"),
+      require("@/assets/heart_q.svg"),
+    ];
+
+    svgPaths.forEach((path) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = path;
+      link.as = "image";
+      link.type = "image/svg+xml";
+      document.head.appendChild(link);
+    });
+  },
 };
 
 createApp(App).use(router).mount("#app");
