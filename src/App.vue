@@ -89,10 +89,24 @@ export default {
     setSex(selectedSex) {
       this.sex = selectedSex;
       this.questions = this.sex === "male" ? questionsM : questionsF;
+      this.shuffle(this.questions);
     },
     answerQuestion({ id, answer }) {
       this.answers = this.answers.slice(0, id);
       this.answers.push(answer);
+    },
+    shuffle(array) {
+      let currentIndex = array.length;
+
+      while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex],
+          array[currentIndex],
+        ];
+      }
     },
   },
   mounted() {
@@ -107,6 +121,9 @@ export default {
       require("@/assets/male_female.svg"),
       require("@/assets/beach.svg"),
       require("@/assets/heart_q.svg"),
+      require("@/assets/linkedin.svg"),
+      require("@/assets/facebook.svg"),
+      require("@/assets/twitterx.svg"),
     ];
 
     svgPaths.forEach((path) => {
@@ -227,7 +244,8 @@ header h1 span {
 }
 
 .question-container,
-.summary-container {
+.summary-container,
+.share-container {
   padding: 20px;
   margin-top: 20px;
   display: flex;
@@ -236,20 +254,37 @@ header h1 span {
   direction: rtl;
 }
 
+.question-container pre,
 .summary-container pre {
   font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
   font-size: 20px;
   line-height: 1.5em;
 }
 
-.question-container h2 {
+.summary-container pre {
+  margin: 0 -20px 0 1px;
+}
+
+.question-container pre {
+  margin-right: -20px;
+}
+
+.question-container h2,
+.share-container h2 {
   font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
   letter-spacing: 3px;
   text-align: center;
   line-height: 1.5em;
 }
 
-.question-container button {
+.share-container p {
+  font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
+  letter-spacing: 3px;
+}
+
+.question-container button,
+.summary-container button,
+.share-container button {
   font-family: "GveretLevinAlefAlefAlef", Arial, sans-serif;
   letter-spacing: 3px;
 }
@@ -269,9 +304,31 @@ button {
   font-size: 16px;
   margin: 10px auto;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 30px;
   width: 75%;
   max-width: 200px;
+  transition: all 0.5s ease;
+  border: 2px solid black;
+}
+
+button:hover {
+  color: black;
+  background-color: var(--button-text-color);
+}
+
+.share-buttons {
+  margin-bottom: 30%;
+}
+
+.share-buttons div {
+  display: inline-flex;
+  height: 100px;
+  width: 100px;
+  transition: all 0.5s ease;
+}
+
+.share-buttons div:hover {
+  filter: invert(1);
 }
 
 ul {

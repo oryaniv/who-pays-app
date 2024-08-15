@@ -1,18 +1,27 @@
 /* eslint-disable */
 <template>
   <div class="question-container">
-    <h2>מה המין שלך?</h2>
-    <button @click="setSex('female')">נקבה</button>
-    <button @click="setSex('male')">זכר</button>
+    <pre>
+        אז מי משלם בדייט?
+        שאלת כמה מאות השקלים (לפעמים).
+
+        רבים ניסו למצוא תשובה לשאלה,
+        אבל היא עודנה בלתי פתורה.
+
+        אך אל דאגה! רק ענו על כמה שאלות,
+        ומיד תקבלו תשובה, ברורה ובהירה.
+
+        בהצלחה :)
+    </pre>
+    <button @click="begin()">קדימה!</button>
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    setSex(sex) {
-      this.$emit("set-sex", sex);
-      this.$router.push("/question/0");
+    begin() {
+      this.$router.push("/MoF");
     },
   },
 };

@@ -66,7 +66,7 @@
       אחרי הכול, כנראה שהקריירה
       שלה מזהירה משלך.
     </pre>
-    <pre v-if="sex === 'female' && score >= 7">
+    <pre v-if="sex== 'female' && score > 7">
       את אישה חזקה ועצמאית,
       כל הכבוד לך!
       את לא מאמינה בסטיגמות ודעות קדומות,
@@ -81,13 +81,7 @@
       גם בדרך חזור, תראי לו,
       את מלכת הכביש.
     </pre>
-    <!-- <h2>Summary</h2>
-    <p>Sex: {{ sex }}</p>
-    <ul>
-      <li v-for="(answer, index) in answers" :key="index">
-        {{ questions[index] }}: {{ answer ? "Yes" : "No" }}
-      </li>
-    </ul> -->
+    <button @click="share()">{{this.continueText}}</button>
   </div>
 </template>
 
@@ -98,7 +92,13 @@ export default {
   data() {
     return {
         score: this.answers.filter(a => !!a).length,
+        continueText: this.sex == "male" ? "המשך" : "המשיכי"
     }
   },
+  methods: {
+      share() {
+        this.$router.push("/share");
+      }
+    }
 }
 </script>
