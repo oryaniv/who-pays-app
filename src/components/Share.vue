@@ -2,7 +2,7 @@
 <template>
   <div class="share-container">
     <h2>נהנית?</h2>
-    <p>למה לא לשתף את החברים?</p>
+    <p>לחצו כדי לשתף את החברים!</p>
     <div class="share-buttons">
 
       <div @click="shareOnLinkedIn" class="linkedin">

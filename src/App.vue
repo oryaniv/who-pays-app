@@ -35,6 +35,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router/router.js";
+import VueGtag from "vue-gtag-next";
 
 const questionsM = [
   "האם לדעתך נשים זוכות ליחס הוגן ושווה במקום העבודה?",
@@ -137,7 +138,18 @@ export default {
   },
 };
 
-createApp(App).use(router).mount("#app");
+const app = createApp(App);
+
+app.use(VueGtag, {
+  property: {
+    id: "G-F6ZCHHYD8K",
+  },
+  useDebugger: true, // Set to true for development
+  isEnabled: true, // Set to false to disable tracking
+});
+
+app.use(router);
+app.mount("#app");
 </script>
 
 <style>
@@ -325,6 +337,7 @@ button:hover {
   height: 100px;
   width: 100px;
   transition: all 0.5s ease;
+  cursor: pointer;
 }
 
 .share-buttons div:hover {
