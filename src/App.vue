@@ -90,7 +90,7 @@ export default {
     setSex(selectedSex) {
       this.sex = selectedSex;
       this.questions = this.sex === "male" ? questionsM : questionsF;
-      this.shuffle(this.questions);
+      // this.shuffle(this.questions);
     },
     answerQuestion({ id, answer }) {
       this.answers = this.answers.slice(0, id);
@@ -185,12 +185,18 @@ html {
 
 .app {
   font-family: Arial, sans-serif;
-  height: 100dvh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+}
+
+@supports (height: 100dvh) {
+  .app {
+    height: 100dvh;
+  }
 }
 
 .header,

@@ -87,6 +87,9 @@
 
 <script>
 /* eslint-disable */
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/firebase';
+
 export default {
   props: ["questions", "answers", "sex"],
   data() {
@@ -98,7 +101,32 @@ export default {
   methods: {
       share() {
         this.$router.push("/share");
+      },
+      formatChoices(sex, answers) {
+        const LSB = (sex === 'male');
+        answers.unshift(LSB);
+        return answers.reduce((sum, currentValue, index) => {
+          return sum + (currentValue ? Math.pow(2, index) : 0);
+        }, 0);
+      },
+      async addUserChoices(choices) {
+      if(!choices || choices.length < 10) {
+        return;
+      }
+      try {
+        const docRef = await addDoc(collection(db, "whoPaysData"), {
+          choices: choices,
+          timestamp: new Date()
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
       }
     }
+  },
+  mounted() {
+    const userChoices = this.formatChoices(this.sex, this.answers);
+    this.addUserChoices(userChoices);
+  }
 }
 </script>

@@ -50,7 +50,7 @@ export default {
     },
     restart() {
         this.$router.push("/");
-    },
-  },
+    }
+  }
 };
 </script>
