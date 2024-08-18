@@ -2,7 +2,7 @@
 <template>
   <div class="share-container">
     <h2>נהנית?</h2>
-    <p>לחצו כדי לשתף את החברים!</p>
+    <p>{{shareText}}</p>
     <div class="share-buttons">
 
       <div @click="shareOnLinkedIn" class="linkedin">
@@ -24,8 +24,10 @@
 
 <script>
 export default {
+  props: ["sex"],
   data() {
     return {
+      shareText: this.sex === "male" ? 'לחץ כדי לשתף עם החברים!' : 'לחצי כדי לשתף עם החברים!',
       appUrl: 'https://who-pays-app-qz3p.vercel.app/',
       appName: 'מי משלם בדייט?',
       appDescription: 'גלו מי עומד לשלם בדייט הבא!',

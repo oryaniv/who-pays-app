@@ -18,7 +18,7 @@ export default {
       return parseInt(this.$route.params.id);
     },
     question() {
-      return this.questions[this.id];
+      return this.questions[this.id].q;
     },
     svgPath() {
       return this.svgPaths[this.id];

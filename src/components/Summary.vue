@@ -102,12 +102,13 @@ export default {
       share() {
         this.$router.push("/share");
       },
-      formatChoices(sex, answers) {
-        const LSB = (sex === 'male');
-        answers.unshift(LSB);
-        return answers.reduce((sum, currentValue, index) => {
-          return sum + (currentValue ? Math.pow(2, index) : 0);
-        }, 0);
+      formatChoices(sex, answers, questions) {
+        let sum = 0;
+        questions.forEach((x, i) => {
+          sum += answers[i] ? 0 : Math.pow(2, x.id);
+        });
+        sum += (sex === 'male') ? 1 : 0 ;
+        return sum;
       },
       async addUserChoices(choices) {
       if(!choices || choices.length < 10) {
@@ -125,7 +126,7 @@ export default {
     }
   },
   mounted() {
-    const userChoices = this.formatChoices(this.sex, this.answers);
+    const userChoices = this.formatChoices(this.sex, this.answers, this.questions);
     this.addUserChoices(userChoices);
   }
 }
