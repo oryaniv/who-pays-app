@@ -105,7 +105,7 @@ export default {
       formatChoices(sex, answers, questions) {
         let sum = 0;
         questions.forEach((x, i) => {
-          sum += answers[i] ? 0 : Math.pow(2, x.id);
+          sum += answers[i] ? Math.pow(2, x.id) : 0;
         });
         sum += (sex === 'male') ? 1 : 0 ;
         return sum;
