@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div class="summary-container">
-    <pre v-if="sex== 'male' && score > 7">
+    <pre v-if="sex== 'male' && score >= 7">
       אתה גבר מהדור הישן,
       אוהב לחזר, לפנק, לפזר אהבה.
 
@@ -66,7 +66,7 @@
       אחרי הכול, כנראה שהקריירה
       שלה מזהירה משלך.
     </pre>
-    <pre v-if="sex== 'female' && score > 7">
+    <pre v-if="sex== 'female' && score >= 7">
       את אישה חזקה ועצמאית,
       כל הכבוד לך!
       את לא מאמינה בסטיגמות ודעות קדומות,
